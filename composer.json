@@ -1,0 +1,20 @@
+{
+    "name": "pragmatico/cms_pages_plugin",
+    "description": "Pages plugin for pragmatico cms",
+    "type": "cakephp-plugin",
+    "homepage": "https://github.com/pragmatico/pragmatico-cms-pages",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tim Roberts",
+            "role": "Author"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "composer/installers": "*"
+    },
+    "extra": {
+        "installer-name": "Pages"
+    }
+}
