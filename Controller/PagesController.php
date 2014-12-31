@@ -92,6 +92,17 @@ class PagesController extends PagesAppController {
     $this->redirect(array('action'=>'index', $parent_id));
   }
 
+/**
+ * cms reorder pages function
+ */
+	public function cms_reorder() {
+		$this->autoRender = false;
+		foreach($this->request->query['sortable'] as $k=>$v) {
+			$this->Page->id = end(explode('row_',$v));
+			$this->Page->set('position',$k);
+			$this->Page->save();
+		}		
+	}
 
 /**
  * Displays a view

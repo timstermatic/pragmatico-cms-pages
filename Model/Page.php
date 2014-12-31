@@ -2,7 +2,15 @@
 class Page extends AppModel {
 
 /**
+ * order pages by position
+ */
+  public $order = array('Page.position'=>'asc');
+
+
+/**
  * sets current page
+ *
+ * @param int $id of page
  */
   public function _setCurrent($id='x') {
   
@@ -16,6 +24,9 @@ class Page extends AppModel {
 
 /**
  * get current revision of a page
+ *
+ * @param int $id of page
+ * @return array page
  */
   public function _currentRevision($id = null)
   {

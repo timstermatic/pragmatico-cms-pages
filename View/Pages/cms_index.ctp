@@ -10,8 +10,9 @@
     <th><?php echo __('Status');?></th>
     <th></th>
   </tr>
+    <tbody id="sortable">
     <?php foreach($pages as $p) { ?>
-    <tr>
+    <tr id="row_<?php echo $p['Page']['id'];?>">
       <td><?php echo $p['Page']['title'];?></td>
       <td><?php echo $p['Page']['in_navigation']==1?'<span class="label label-success">Yes</span>':'<span class="label label-default">No</span>';?></td>
       <td><?php echo $p['Page']['published']==1?'<span class="label label-success">Published</span>':'<span class="label label-default">Draft</span>';?></td>
@@ -22,4 +23,17 @@
       </td>
     </tr>
     <?php } ?>
+    </tbody>
 </table>
+
+<?php echo $this->Html->script('Pages.sortable');?>
+
+<script> 
+$("#sortable").tableDnD({onDragClass: "being_dragged",onDrop: function(table, row) {
+	$.ajax({
+		type: "GET",
+		url: "<?php echo Router::url('/cms/pages/pages/reorder', true);?>",
+		data: $.tableDnD.serialize()
+	});
+}});
+</script> 
