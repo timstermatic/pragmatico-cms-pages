@@ -42,6 +42,7 @@ class PagesController extends PagesAppController {
   {
     if($this->request->is('post')) {
       $this->request->data['Page']['current'] = 1;
+      $this->request->data['Page']['position'] = 1000;
       if($this->Page->save($this->request->data)) {
         $this->Page->saveField('revision_of_page_id', $this->Page->id);
         $this->Session->setFlash(__('Page created'), 'flash_success');
@@ -112,32 +113,12 @@ class PagesController extends PagesAppController {
  *   or MissingViewException in debug mode.
  */
 	public function display() {
-		$path = func_get_args();
+	  $content = $this->Page->_findByUrl($this->here);
+      $title_for_layout = $content['Page']['meta_title'];
+      $meta_description = $content['Page']['meta_description'];
+      $meta_keywords = $content['Page']['meta_keywords'];
+      
+      $this->set(compact('content', 'title_for_layout', 'meta_keywords', 'meta_description'));
 
-		$count = count($path);
-		if (!$count) {
-			return $this->redirect('/');
-		}
-		$page = $subpage = $title_for_layout = null;
-
-		if (!empty($path[0])) {
-			$page = $path[0];
-		}
-		if (!empty($path[1])) {
-			$subpage = $path[1];
-		}
-		if (!empty($path[$count - 1])) {
-			$title_for_layout = Inflector::humanize($path[$count - 1]);
-		}
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
-
-		try {
-			$this->render(implode('/', $path));
-		} catch (MissingViewException $e) {
-			if (Configure::read('debug')) {
-				throw $e;
-			}
-			throw new NotFoundException();
-		}
-	}
+    }
 }

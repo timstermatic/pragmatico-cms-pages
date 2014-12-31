@@ -39,4 +39,23 @@ class Page extends AppModel {
     ));
   }
 
+/**
+ * find current page by url
+ *
+ * @param $url string
+ * @return array page
+ */
+  public function _findByUrl($url)
+  {
+    return $this->find('first', array(
+      'conditions'=>array(
+        'Page.url'=>$url,
+        'Page.deleted'=>0,
+        'Page.current'=>1
+      )
+    ));
+  
+  }
+
+
 }

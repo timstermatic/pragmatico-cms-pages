@@ -3,6 +3,7 @@
 <div class="row">
   
   <div class="col-md-8">
+    <?php echo $this->Form->input('Page.position', array('type'=>'hidden'));?>
     <?php echo $this->Form->input('Page.title', array('class'=>'form-control'));?>
     <?php echo $this->Form->input('Page.content', array('class'=>'form-control editor', 'type'=>'textarea'));?>
     <hr>
@@ -10,9 +11,9 @@
       <?php echo $this->Form->input('Page.meta_title', array('class'=>'form-control'));?>
       <?php echo $this->Form->input('Page.meta_keywords', array('class'=>'form-control'));?>
       <?php echo $this->Form->input('Page.meta_description', array('class'=>'form-control'));?>
-        <label>URL</label>
+        <label>URL <small>(use / for home page)</small></label>
       <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1"><?php echo Router::url('/', true);?></span>
+        <span class="input-group-addon" id="basic-addon1"><?php echo $_SERVER['HTTP_HOST'];?></span>
         <?php echo $this->Form->input('Page.url', array('class'=>'form-control', 'aria-describedby'=>'basic-addon1', 'div'=>false, 'label'=>false));?>
       </div>
       <br>
